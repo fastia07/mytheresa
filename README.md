@@ -48,6 +48,11 @@ Each request should, at minimum, have the following signature:
 ```
 You are expected to design any other required models and routes for your API.
 
+### Load the fixtures for initial test data
+
+``php bin/console doctrine:fixtures:load -n``
+
+
 ### Evaluation Criteria
 
 - PHP best practices
