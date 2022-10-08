@@ -52,6 +52,10 @@ You are expected to design any other required models and routes for your API.
 
 ``php bin/console doctrine:fixtures:load -n``
 
+### Postman collections
+
+API endpoints of workers/manager are mentioned in the following path
+``docs/postman_collection.json``
 
 ### Evaluation Criteria
 

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\RequestRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RequestRepository::class)
  */
-class Request
+class HolidayRequest
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Request
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status = 'pending';
 
     /**
      * @ORM\Column(type="integer")
@@ -46,6 +46,11 @@ class Request
      * @ORM\Column(type="datetime")
      */
     private $vacation_end_date;
+
+    public function __construct()
+    {
+        $this->request_created_at = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +127,10 @@ class Request
         $this->vacation_end_date = $vacation_end_date;
 
         return $this;
+    }
+
+    public function validateVacationDate(): bool
+    {
+        return $this->getVacationStartDate() > $this->getVacationEndDate();
     }
 }

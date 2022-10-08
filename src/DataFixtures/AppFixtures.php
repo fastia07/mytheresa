@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Manager;
-use App\Entity\Request;
+use App\Entity\HolidayRequest;
 use App\Entity\Worker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -36,7 +36,7 @@ final class AppFixtures extends Fixture
         $status = ['approved', 'rejected', 'pending'];
         // create test requests.
         for ($i = 0; $i < 15; $i++) {
-            $request = new Request();
+            $request = new HolidayRequest();
             $request->setAuthor(rand(1, 9));
             $request->setResolvedBy(rand(1, 4));
             $request->setStatus($status[array_rand($status)]);
