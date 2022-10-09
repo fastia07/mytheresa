@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\HolidayRequest;
 use App\Repository\HolidayRequestRepository;
+use App\Repository\ManagerRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,6 +22,10 @@ final class HolidayRequestService
      * @var HolidayRequestRepository
      */
     private $holidayRequestRepository;
+    /**
+     * @var ManagerRepository
+     */
+    private $managerRepository;
 
     /**
      * @param WorkerService $workerService
@@ -30,12 +35,14 @@ final class HolidayRequestService
     public function __construct(
         WorkerService            $workerService,
         EntityManagerInterface   $entityManager,
-        HolidayRequestRepository $holidayRequestRepository
+        HolidayRequestRepository $holidayRequestRepository,
+        ManagerRepository        $managerRepository
     )
     {
         $this->workerService = $workerService;
         $this->entityManager = $entityManager;
         $this->holidayRequestRepository = $holidayRequestRepository;
+        $this->managerRepository = $managerRepository;
     }
 
     /**
@@ -47,7 +54,7 @@ final class HolidayRequestService
      */
     public function add(HolidayRequest $holidayRequest): HolidayRequest
     {
-        $balance = $this->workerService->findLeaveBalance($holidayRequest->getAuthor());
+        $balance = $this->workerService->findLeaveBalance($holidayRequest->getAuthor()->getId());
         $numberOfDays = date_diff($holidayRequest->getVacationStartDate(), $holidayRequest->getVacationEndDate())->days;
 
         if (empty($balance) || $balance < $numberOfDays)
@@ -101,15 +108,21 @@ final class HolidayRequestService
             throw new Exception('No Holiday Request found with ' . $holidayRequestId);
         }
 
+        $manager = $this->managerRepository->find($managerId);
+
+        if (!$manager) {
+            throw new Exception('No manager found with manager id ' . $managerId);
+        }
+
         $holidayRequest->setStatus($status);
-        $holidayRequest->setResolvedBy($managerId);
+        $holidayRequest->setResolvedBy($manager);
 
         $this->entityManager->persist($holidayRequest);
         $this->entityManager->flush();
 
         if ($holidayRequest->getStatus() == 'approved') {
             $numberOfDays = date_diff($holidayRequest->getVacationStartDate(), $holidayRequest->getVacationEndDate())->days;
-            $this->workerService->deductLeaves($holidayRequest->getAuthor(), $numberOfDays);
+            $this->workerService->deductLeaves($holidayRequest->getAuthor()->getId(), $numberOfDays);
         }
 
         return $holidayRequest;

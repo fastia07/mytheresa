@@ -7,6 +7,7 @@ use App\Service\WorkerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,7 +68,7 @@ final class ManagerController extends AbstractController
             $holidayPostRequest->status
         );
 
-        return $this->json($serializer->normalize($response, 'json'));
+        return $this->json($serializer->normalize($response, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['__initializer__', '__cloner__', '__isInitialized__']]));
     }
 
     /**
@@ -84,7 +85,7 @@ final class ManagerController extends AbstractController
 
         $response = $this->holidayRequestService->getHolidayRequests($status);
 
-        return $this->json($serializer->normalize($response, 'json'));
+        return $this->json($serializer->normalize($response, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['__initializer__', '__cloner__', '__isInitialized__']]));
     }
 
     /**
@@ -101,6 +102,6 @@ final class ManagerController extends AbstractController
 
         $response = $this->holidayRequestService->getOverlappingRequests($startDate, $endDate);
 
-        return $this->json($serializer->normalize($response, 'json'));
+        return $this->json($serializer->normalize($response, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['__initializer__', '__cloner__', '__isInitialized__']]));
     }
 }

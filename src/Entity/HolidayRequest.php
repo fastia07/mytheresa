@@ -18,7 +18,8 @@ class HolidayRequest
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity=Worker::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="author", referencedColumnName="id")
      */
     private $author;
 
@@ -28,7 +29,8 @@ class HolidayRequest
     private $status = 'pending';
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity=Manager::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="resolved_by", referencedColumnName="id")
      */
     private $resolved_by;
 
@@ -57,12 +59,12 @@ class HolidayRequest
         return $this->id;
     }
 
-    public function getAuthor(): ?int
+    public function getAuthor(): ?Worker
     {
         return $this->author;
     }
 
-    public function setAuthor(int $author): self
+    public function setAuthor(?Worker $author): self
     {
         $this->author = $author;
 
@@ -81,12 +83,12 @@ class HolidayRequest
         return $this;
     }
 
-    public function getResolvedBy(): ?int
+    public function getResolvedBy(): ?Manager
     {
         return $this->resolved_by;
     }
 
-    public function setResolvedBy(int $resolved_by): self
+    public function setResolvedBy(?Manager $resolved_by): self
     {
         $this->resolved_by = $resolved_by;
 

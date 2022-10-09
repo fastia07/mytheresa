@@ -9,6 +9,7 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,7 +62,7 @@ final class WorkerController extends AbstractController
         $workerHolidayRequest = json_decode($request->getContent());
 
         $holidayRequest = new HolidayRequest();
-        $holidayRequest->setAuthor($workerHolidayRequest->author);
+        $holidayRequest->setAuthor($this->workerService->findWorker($workerHolidayRequest->author));
         $holidayRequest->setVacationStartDate(new DateTime($workerHolidayRequest->vacationStartDate));
         $holidayRequest->setVacationEndDate(new DateTime($workerHolidayRequest->vacationEndDate));
 
@@ -93,6 +94,6 @@ final class WorkerController extends AbstractController
 
         $response = $this->holidayRequestService->getHolidayRequests($status, $id);
 
-        return $this->json($serializer->normalize($response, 'json'));
+        return $this->json($serializer->normalize($response, 'json', [AbstractNormalizer::IGNORED_ATTRIBUTES => ['__initializer__', '__cloner__', '__isInitialized__']]));
     }
 }
