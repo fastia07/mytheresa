@@ -1,0 +1,279 @@
+swagger: '2.0'
+info:
+  description: REST API for Holiday Request Approval System
+  version: 1.0.0-alpha
+  title: Holiday Request Planner API
+host: virtserver.swaggerhub.com
+schemes:
+  - https
+definitions:
+  Worker:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      leaveBalance:
+        type: integer
+  Manager:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  LeaveBalance:
+    type: object
+    properties:
+      result:
+        type: integer
+  HolidayRequests:
+    properties:
+      id:
+        type: integer
+      status:
+        type: string
+      author:
+        type: object
+        $ref: '#/definitions/Worker'
+      resolvedBy:
+        type: object
+        $ref: '#/definitions/Manager'
+      requestCreatedAt:
+        type: string
+      vacationStartDate:
+        type: string
+      vacationEndDate:
+        type: string
+  CreateHolidayRequests:
+    type: object
+    properties:
+      result:
+        type: string
+        example: "Your holiday request created with ID: 1"
+  Error:
+    type: object
+    properties:
+      name:
+        type: string
+      message:
+        type: string
+      code:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+responses:
+  BadRequest:
+    description: Bad Request
+    schema:
+      $ref: '#/definitions/Error'
+  Unauthorized:
+    description: Unauthorized
+    schema:
+      $ref: '#/definitions/Error'
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: '#/definitions/Error'
+  NotFound:
+    description: Not Found
+    schema:
+      $ref: '#/definitions/Error'
+  Unexpected:
+    description: Unexpected Error
+    schema:
+      $ref: '#/definitions/Error'
+
+paths:
+  /workers/{id}/remaning_leaves:
+    get:
+      tags:
+        - Worker
+      summary: 'View remaining leaves'
+      description: 'Return remaining leave count.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters: 
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/LeaveBalance'
+          
+  /workers/{id}/holiday_requests:
+    get:
+      tags:
+        - Worker
+      summary: 'Check the status of their holiday requests'
+      description: 'Returns list of request place by worker.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters: 
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Numeric ID of the user to get
+        - in: query
+          name: status
+          type: string
+          description: status of holiday requests
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/HolidayRequests'
+  /workers/holiday_requests:
+    post:
+      tags:
+        - Worker
+      summary: 'Create holiday requests'
+      description: 'Return the success message with request id.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User properties
+          required: true
+          schema:
+            required:
+              - author
+              - vacationStartDate
+              - vacationEndDate
+            properties:
+              author:
+                type: integer
+              vacationStartDate:
+                type: string
+              vacationEndDate:
+                type: string
+            type: object
+
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateHolidayRequests'
+        403:
+          $ref: '#/responses/Forbidden'
+  /managers/search_workers:
+    get:
+      tags:
+        - Manager
+      summary: 'View worker'
+      description: 'Return worker.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters: 
+        - in: query
+          name: id
+          type: integer
+          required: true
+          description: Numeric ID of the worker to get
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Worker'
+  /managers/worker_holiday_requests:
+    get:
+      tags:
+        - Manager
+      summary: 'Get list of holiday requests by status'
+      description: 'Return list of requests.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters: 
+        - in: query
+          name: status
+          type: string
+          required: true
+          description: Search by status
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/HolidayRequests'
+  /managers/worker_overlap_requests:
+    get:
+      tags:
+        - Manager
+      summary: 'Get list of overlapping holiday requests'
+      description: 'Return list of requests.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters: 
+        - in: query
+          name: startDate
+          type: string
+          required: true
+          description: Search by startDate
+        - in: query
+          name: endDate
+          type: string
+          required: true
+          description: Search by endDate
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/HolidayRequests'
+  /managers/update_holiday_requests:
+    post:
+      tags:
+        - Manager
+      summary: 'Process holiday requests'
+      description: 'Return the holiday request.'
+      consumes: 
+        - application/json
+      produces: 
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User properties
+          required: true
+          schema:
+            required:
+              - holidayRequestId
+              - managerId
+              - status
+            properties:
+              author:
+                type: integer
+              managerId:
+                type: integer
+              status:
+                type: string
+            type: object
+
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateHolidayRequests'
+        403:
+          $ref: '#/responses/Forbidden'

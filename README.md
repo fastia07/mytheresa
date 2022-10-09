@@ -57,6 +57,11 @@ You are expected to design any other required models and routes for your API.
 API endpoints of workers/manager are mentioned in the following path
 ``docs/postman_collection.json``
 
+### Swagger for API Documentation
+
+For details about the end point documentation can be found in the following swagger file
+``docs/swagger.yaml``
+
 ### How to run unit test
 
 Test can be run with following command:
