@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "833a8ff5-7765-4cf2-8993-29410cd50888",
-		"name": "Leave Approval System",
+		"name": "Holiday Request Planner",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,15 +14,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/managers/search_workers?id=3",
-							"protocol": "http",
+							"raw": "{{project_url}}/managers/search_workers?id={{id}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{project_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"managers",
 								"search_workers"
@@ -30,7 +25,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "3"
+									"value": "{{id}}"
 								}
 							]
 						}
@@ -111,7 +106,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/managers/worker_holiday_requests?status=pending",
+							"raw": "http://127.0.0.1:8000/managers/worker_holiday_requests?status={{status}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -127,7 +122,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "pending"
+									"value": "{{status}}"
 								}
 							]
 						}
@@ -203,7 +198,7 @@
 					]
 				},
 				{
-					"name": "Process holiday leaves",
+					"name": "Process holiday requests",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -217,18 +212,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/managers/update_worker_leaves",
-							"protocol": "http",
+							"raw": "{{project_url}}/managers/update_holiday_requests",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{project_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"managers",
-								"update_worker_leaves"
+								"update_holiday_requests"
 							]
 						}
 					},
@@ -248,7 +238,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/managers/update_worker_leaves",
+									"raw": "http://127.0.0.1:8000/managers/update_holiday_requests",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -259,7 +249,7 @@
 									"port": "8000",
 									"path": [
 										"managers",
-										"update_worker_leaves"
+										"update_holiday_requests"
 									]
 								}
 							},
@@ -315,15 +305,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/managers/worker_overlap_requests?startDate=2022-10-24&endDate=2022-11-03",
-							"protocol": "http",
+							"raw": "{{project_url}}/managers/worker_overlap_requests?startDate={{startDate}}&endDate={{endDate}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{project_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"managers",
 								"worker_overlap_requests"
@@ -331,11 +316,11 @@
 							"query": [
 								{
 									"key": "startDate",
-									"value": "2022-10-24"
+									"value": "{{startDate}}"
 								},
 								{
 									"key": "endDate",
-									"value": "2022-11-03"
+									"value": "{{endDate}}"
 								}
 							]
 						}
@@ -424,7 +409,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "{{project_url}}/workers/{{id}}/remaning_leaves",
+							"host": [
+								"{{project_url}}"
+							],
+							"path": [
+								"workers",
+								"{{id}}",
+								"remaning_leaves"
+							]
+						}
 					},
 					"response": [
 						{
@@ -433,7 +428,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8000/workers/remaning_leaves?id=3",
+									"raw": "http://127.0.0.1:8000/workers/3/remaning_leaves",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -444,13 +439,8 @@
 									"port": "8000",
 									"path": [
 										"workers",
+										"3",
 										"remaning_leaves"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "3"
-										}
 									]
 								}
 							},
@@ -468,15 +458,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 08 Oct 2022 22:23:12 GMT"
+									"value": "Sat, 08 Oct 2022 23:37:53 GMT"
 								},
 								{
 									"key": "X-Debug-Token",
-									"value": "33da61"
+									"value": "98e80a"
 								},
 								{
 									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/33da61"
+									"value": "http://127.0.0.1:8000/_profiler/98e80a"
 								},
 								{
 									"key": "X-Powered-By",
@@ -502,39 +492,31 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/workers/requests?id=3&status=pending",
-							"protocol": "http",
+							"raw": "{{project_url}}/workers/{{id}}/holiday_requests?status={{status}}",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{project_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"workers",
-								"requests"
+								"{{id}}",
+								"holiday_requests"
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "3"
-								},
-								{
 									"key": "status",
-									"value": "pending"
+									"value": "{{status}}"
 								}
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Check Holiday Request status",
+							"name": "Check holiday request status",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8000/workers/requests?id=3&status=pending",
+									"raw": "http://127.0.0.1:8000/workers/3/holiday_requests?status=pending",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -545,13 +527,10 @@
 									"port": "8000",
 									"path": [
 										"workers",
-										"requests"
+										"3",
+										"holiday_requests"
 									],
 									"query": [
-										{
-											"key": "id",
-											"value": "3"
-										},
 										{
 											"key": "status",
 											"value": "pending"
@@ -573,15 +552,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 08 Oct 2022 22:26:11 GMT"
+									"value": "Sat, 08 Oct 2022 23:38:59 GMT"
 								},
 								{
 									"key": "X-Debug-Token",
-									"value": "7645ef"
+									"value": "94ecf9"
 								},
 								{
 									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/7645ef"
+									"value": "http://127.0.0.1:8000/_profiler/94ecf9"
 								},
 								{
 									"key": "X-Powered-By",
@@ -616,18 +595,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/workers/request_leaves",
-							"protocol": "http",
+							"raw": "{{project_url}}/workers/holiday_requests",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{project_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"workers",
-								"request_leaves"
+								"holiday_requests"
 							]
 						}
 					},
@@ -647,7 +621,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/workers/request_leaves",
+									"raw": "http://127.0.0.1:8000/workers/holiday_requests",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -658,7 +632,7 @@
 									"port": "8000",
 									"path": [
 										"workers",
-										"request_leaves"
+										"holiday_requests"
 									]
 								}
 							},
@@ -676,19 +650,19 @@
 								},
 								{
 									"key": "Date",
-									"value": "Sat, 08 Oct 2022 22:24:42 GMT"
+									"value": "Sat, 08 Oct 2022 23:41:29 GMT"
 								},
 								{
 									"key": "Expires",
-									"value": "Sat, 08 Oct 2022 22:24:42 GMT"
+									"value": "Sat, 08 Oct 2022 23:41:29 GMT"
 								},
 								{
 									"key": "X-Debug-Token",
-									"value": "963f8e"
+									"value": "45eced"
 								},
 								{
 									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/963f8e"
+									"value": "http://127.0.0.1:8000/_profiler/45eced"
 								},
 								{
 									"key": "X-Powered-By",
@@ -704,7 +678,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"result\": \"Your leave request created with ID: 19\"\n}"
+							"body": "{\n    \"result\": \"Your leave request created with ID: 20\"\n}"
 						}
 					]
 				}

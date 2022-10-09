@@ -40,58 +40,58 @@ final class WorkerController extends AbstractController
     }
 
     /**
-     * @Route("/remaning_leaves", methods={"GET"})
-     * @param Request $request
+     * @Route("/{id}/remaning_leaves", methods={"GET"})
+     * @param int $id
      * @return JsonResponse
      * @throws \Doctrine\DBAL\Exception
      */
-    public function getBalance(Request $request): JsonResponse
+    public function getBalance(int $id): JsonResponse
     {
-        return $this->json(['result' => $this->workerService->findLeaveBalance($request->query->get('id'))]);
+        return $this->json(['result' => $this->workerService->findLeaveBalance($id)]);
     }
 
     /**
-     * @Route("/request_leaves", methods={"POST"})
+     * @Route("/holiday_requests", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      * @throws \Doctrine\DBAL\Exception
      */
-    public function requestLeaves(Request $request): JsonResponse
+    public function addRequest(Request $request): JsonResponse
     {
         $workerHolidayRequest = json_decode($request->getContent());
 
-        $leaveRequest = new HolidayRequest();
-        $leaveRequest->setAuthor($workerHolidayRequest->author);
-        $leaveRequest->setVacationStartDate(new DateTime($workerHolidayRequest->vacationStartDate));
-        $leaveRequest->setVacationEndDate(new DateTime($workerHolidayRequest->vacationEndDate));
+        $holidayRequest = new HolidayRequest();
+        $holidayRequest->setAuthor($workerHolidayRequest->author);
+        $holidayRequest->setVacationStartDate(new DateTime($workerHolidayRequest->vacationStartDate));
+        $holidayRequest->setVacationEndDate(new DateTime($workerHolidayRequest->vacationEndDate));
 
-        if ($leaveRequest->validateVacationDate()) {
+        if ($holidayRequest->validateVacationDate()) {
             throw new \Exception('Vacation dates are incorrect');
         }
 
-        $result = $this->holidayRequestService->add($leaveRequest);
+        $result = $this->holidayRequestService->add($holidayRequest);
 
-        return $this->json(['result' => 'Your leave request created with ID: ' . $result->getId()]);
+        return $this->json(['result' => 'Your holiday request created with ID: ' . $result->getId()]);
     }
 
     /**
-     * @Route("/requests", methods={"GET"})
+     * @Route("/{id}/holiday_requests", methods={"GET"})
+     * @param int $id
      * @param Request $request
      * @param SerializerInterface $serializer
      * @return JsonResponse
      * @throws \Doctrine\DBAL\Exception
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function search(Request $request, SerializerInterface $serializer): JsonResponse
+    public function search(int $id, Request $request, SerializerInterface $serializer): JsonResponse
     {
-        $workerId = $request->query->get('id');
-        $status = $request->query->get('status');
-
-        if (empty($workerId)) {
+        if (empty($id)) {
             throw new \Exception('Worker Id is missing');
         }
 
-        $response = $this->holidayRequestService->getLeavesRequests($status, $workerId);
+        $status = $request->query->get('status');
+
+        $response = $this->holidayRequestService->getHolidayRequests($status, $id);
 
         return $this->json($serializer->normalize($response, 'json'));
     }

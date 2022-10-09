@@ -67,7 +67,7 @@ final class HolidayRequestService
      * @return array
      * @throws Exception
      */
-    public function getLeavesRequests(string $status, int $workerId = null): array
+    public function getHolidayRequests(string $status, int $workerId = null): array
     {
         $criteria = ['status' => $status];
 
@@ -75,13 +75,13 @@ final class HolidayRequestService
             $criteria['author'] = $workerId;
         }
 
-        $leaveRequests = $this->holidayRequestRepository->findBy($criteria);
+        $holidayRequests = $this->holidayRequestRepository->findBy($criteria);
 
-        if (!$leaveRequests) {
+        if (!$holidayRequests) {
             throw new Exception('Leave requests not found with your selected filters');
         }
 
-        return $leaveRequests;
+        return $holidayRequests;
     }
 
     /**

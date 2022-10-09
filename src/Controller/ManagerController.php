@@ -50,14 +50,14 @@ final class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("/update_worker_leaves", methods={"POST"})
+     * @Route("/update_holiday_requests", methods={"POST"})
      * @param Request $request
      * @param SerializerInterface $serializer
      * @return JsonResponse
      * @throws \Doctrine\DBAL\Exception
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function updateLeaves(Request $request, SerializerInterface $serializer): JsonResponse
+    public function processRequest(Request $request, SerializerInterface $serializer): JsonResponse
     {
         $holidayPostRequest = json_decode($request->getContent());
 
@@ -82,7 +82,7 @@ final class ManagerController extends AbstractController
     {
         $status = $request->query->get('status');
 
-        $response = $this->holidayRequestService->getLeavesRequests($status);
+        $response = $this->holidayRequestService->getHolidayRequests($status);
 
         return $this->json($serializer->normalize($response, 'json'));
     }
@@ -94,7 +94,7 @@ final class ManagerController extends AbstractController
      * @return JsonResponse
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function gerOverlap(Request $request, SerializerInterface $serializer): JsonResponse
+    public function getOverlapRequests(Request $request, SerializerInterface $serializer): JsonResponse
     {
         $startDate = $request->query->get('startDate');
         $endDate = $request->query->get('endDate');
