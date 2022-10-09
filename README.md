@@ -57,6 +57,16 @@ You are expected to design any other required models and routes for your API.
 API endpoints of workers/manager are mentioned in the following path
 ``docs/postman_collection.json``
 
+### How to run unit test
+
+Test can be run with following command:
+``php vendor/bin/codecept run unit``
+
+### How to run api test
+
+Test can be run with following command:
+``php vendor/bin/codecept run api``
+
 ### Evaluation Criteria
 
 - PHP best practices

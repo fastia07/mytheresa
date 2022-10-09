@@ -1,0 +1,15 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+            url: http://127.0.0.1:8000/
+            depends: PhpBrowser
+            part: Json
+        - Db:
+            dsn: 'sqlite:./var/app.db'
+            user: ''
+            password: ''
+            dump: tests/_data/test.sql
+            populate: true
+            cleanup: true
+            reconnect: true

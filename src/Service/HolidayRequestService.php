@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\HolidayRequest;
+use App\Exception\InsufficientLeavesException;
 use App\Repository\HolidayRequestRepository;
 use App\Repository\ManagerRepository;
 use Doctrine\DBAL\Exception;
@@ -58,7 +59,7 @@ final class HolidayRequestService
         $numberOfDays = date_diff($holidayRequest->getVacationStartDate(), $holidayRequest->getVacationEndDate())->days;
 
         if (empty($balance) || $balance < $numberOfDays)
-            throw new Exception('Dont have sufficient leave balance to apply.');
+            throw new InsufficientLeavesException();
 
         $this->entityManager->persist($holidayRequest);
         $this->entityManager->flush();
