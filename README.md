@@ -48,7 +48,11 @@ Each request should, at minimum, have the following signature:
 ```
 You are expected to design any other required models and routes for your API.
 
-### Load the fixtures for initial test data
+### Run migrations for initialising the tables
+
+``php bin/console doctrine:migrations:migrate``
+
+### Load the fixtures for initial data
 
 ``php bin/console doctrine:fixtures:load -n``
 
