@@ -4,56 +4,25 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Manager;
-use App\Entity\HolidayRequest;
-use App\Entity\Worker;
+use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-use DateTime;
 
 final class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
-
-        $listWorkers = [];
-        $listManagers = [];
-        // create test workers.
-        for ($i = 0; $i < 10; $i++) {
-            $worker = new Worker();
-            $worker->setName($faker->name);
-            $worker->setLeaveBalance($faker->unique()->randomDigit());
-            $manager->persist($worker);
-            $listWorkers[$i] = $worker;
-        }
-
-        // create test mangers.
-        for ($i = 0; $i < 3; $i++) {
-            $workerManager = new Manager();
-            $workerManager->setName($faker->name);
-            $manager->persist($workerManager);
-            $listManagers[$i] = $workerManager;
-        }
-
-        $status = ['approved', 'rejected', 'pending'];
-        // create test requests.
-        for ($i = 0; $i < 15; $i++) {
-            $request = new HolidayRequest();
-            $request->setAuthor($listWorkers[rand(0,9)]);
-            $request->setStatus($status[array_rand($status)]);
-            if ($request->getStatus() != 'pending')
-                $request->setResolvedBy($listManagers[rand(0,2)]);
-            $request->setRequestCreatedAt(new DateTime());
-
-            $request->setVacationStartDate((new DateTime())->setTimestamp(rand(1666216800, 1666648800))
-            );
-
-            $request->setVacationEndDate((new DateTime())->setTimestamp(rand(1666821600, 1668034800))
-            );
-
-            $manager->persist($request);
+        $categories = ['boots', 'men', 'women', 'electronics', 'kitchen'];
+        // create test products.
+        for ($i = 0; $i < 20; $i++) {
+            $product = new Product();
+            $product->setName($faker->sentence(2));
+            $product->setCost($faker->randomNumber(5, 1, 1000));
+            $product->setCategory($categories[array_rand($categories)]);
+            $product->setSku('00000' . $faker->randomDigitNotZero());
+            $manager->persist($product);
         }
 
         $manager->flush();

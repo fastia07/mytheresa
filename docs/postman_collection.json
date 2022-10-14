@@ -1,112 +1,44 @@
 {
 	"info": {
-		"_postman_id": "833a8ff5-7765-4cf2-8993-29410cd50888",
-		"name": "Holiday Request Planner",
+		"_postman_id": "0acf5363-aa2f-48cd-aafd-34d5923540c0",
+		"name": "Product Search",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Manger API's",
-			"item": [
-				{
-					"name": "Search worker",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{project_url}}/managers/search_workers?id={{id}}",
-							"host": [
-								"{{project_url}}"
-							],
-							"path": [
-								"managers",
-								"search_workers"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "{{id}}"
-								}
-							]
-						}
-					},
-					"response": [
+			"name": "Search by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/products?category=boots",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"products"
+					],
+					"query": [
 						{
-							"name": "Search worker by workerId:3",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8000/managers/search_workers?id=3",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8000",
-									"path": [
-										"managers",
-										"search_workers"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "3"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sat, 08 Oct 2022 22:06:13 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "6fbc83"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/6fbc83"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "58"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"result\": {\n        \"id\": 3,\n        \"name\": \"Lambert Wolf\",\n        \"leaveBalance\": 3\n    }\n}"
+							"key": "category",
+							"value": "boots"
 						}
 					]
-				},
+				}
+			},
+			"response": [
 				{
-					"name": "Fetch holiday requests using status",
-					"request": {
+					"name": "Search by category",
+					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/managers/worker_holiday_requests?status={{status}}",
+							"raw": "http://127.0.0.1:8000/products?category=boots",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -116,546 +48,158 @@
 							],
 							"port": "8000",
 							"path": [
-								"managers",
-								"worker_holiday_requests"
+								"products"
 							],
 							"query": [
 								{
-									"key": "status",
-									"value": "{{status}}"
+									"key": "category",
+									"value": "boots"
 								}
 							]
 						}
 					},
-					"response": [
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
 						{
-							"name": "Fetch holiday requests using status",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:8000/managers/worker_holiday_requests?status={{status}}",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "8000",
-									"path": [
-										"managers",
-										"worker_holiday_requests"
-									],
-									"query": [
-										{
-											"key": "status",
-											"value": "{{status}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:31:06 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "9a0b4f"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/9a0b4f"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1998"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"author\": {\n            \"id\": 1,\n            \"name\": \"Ms. Laurence Hegmann\",\n            \"leaveBalance\": 2\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-21T11:40:34+00:00\",\n        \"vacationEndDate\": \"2022-11-05T06:27:48+00:00\"\n    },\n    {\n        \"id\": 2,\n        \"author\": {\n            \"id\": 2,\n            \"name\": \"Sydnie Brown III\",\n            \"leaveBalance\": 7\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-22T03:55:23+00:00\",\n        \"vacationEndDate\": \"2022-10-27T14:09:15+00:00\"\n    },\n    {\n        \"id\": 3,\n        \"author\": {\n            \"id\": 1,\n            \"name\": \"Ms. Laurence Hegmann\",\n            \"leaveBalance\": 2\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-20T15:16:00+00:00\",\n        \"vacationEndDate\": \"2022-10-28T11:08:08+00:00\"\n    },\n    {\n        \"id\": 6,\n        \"author\": {\n            \"id\": 8,\n            \"name\": \"Justyn Baumbach\",\n            \"leaveBalance\": 4\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-23T09:03:53+00:00\",\n        \"vacationEndDate\": \"2022-11-07T11:55:37+00:00\"\n    },\n    {\n        \"id\": 10,\n        \"author\": {\n            \"id\": 8,\n            \"name\": \"Justyn Baumbach\",\n            \"leaveBalance\": 4\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-23T18:44:49+00:00\",\n        \"vacationEndDate\": \"2022-11-09T22:39:19+00:00\"\n    },\n    {\n        \"id\": 11,\n        \"author\": {\n            \"id\": 7,\n            \"name\": \"Dr. Adeline Gislason\",\n            \"leaveBalance\": 8\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-21T07:15:33+00:00\",\n        \"vacationEndDate\": \"2022-11-06T10:19:30+00:00\"\n    },\n    {\n        \"id\": 14,\n        \"author\": {\n            \"id\": 10,\n            \"name\": \"Madison Herman\",\n            \"leaveBalance\": 3\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-20T18:37:31+00:00\",\n        \"vacationEndDate\": \"2022-11-08T03:16:52+00:00\"\n    },\n    {\n        \"id\": 16,\n        \"author\": {\n            \"id\": 2,\n            \"name\": \"Sydnie Brown III\",\n            \"leaveBalance\": 7\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:30:09+00:00\",\n        \"vacationStartDate\": \"2022-10-10T18:15:56+00:00\",\n        \"vacationEndDate\": \"2022-10-13T18:15:56+00:00\"\n    }\n]"
-						}
-					]
-				},
-				{
-					"name": "Process holiday requests",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"holidayRequestId\": 1,\n    \"managerId\": 2,\n    \"status\": \"approved\"\n\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"key": "Cache-Control",
+							"value": "no-cache, private"
 						},
-						"url": {
-							"raw": "{{project_url}}/managers/update_holiday_requests",
-							"host": [
-								"{{project_url}}"
-							],
-							"path": [
-								"managers",
-								"update_holiday_requests"
-							]
-						}
-					},
-					"response": [
 						{
-							"name": "Process holiday requests",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"holidayRequestId\": 1,\n    \"managerId\": 2,\n    \"status\": \"approved\"\n\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{project_url}}/managers/update_holiday_requests",
-									"host": [
-										"{{project_url}}"
-									],
-									"path": [
-										"managers",
-										"update_holiday_requests"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "max-age=0, must-revalidate, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:31:52 GMT"
-								},
-								{
-									"key": "Expires",
-									"value": "Sun, 09 Oct 2022 01:31:52 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "9bfd87"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/9bfd87"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "290"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"id\": 1,\n    \"author\": {\n        \"id\": 1,\n        \"name\": \"Ms. Laurence Hegmann\",\n        \"leaveBalance\": 12\n    },\n    \"status\": \"approved\",\n    \"resolvedBy\": {\n        \"id\": 2,\n        \"name\": \"Mrs. Mollie Feeney DVM\"\n    },\n    \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n    \"vacationStartDate\": \"2022-10-21T11:40:34+00:00\",\n    \"vacationEndDate\": \"2022-11-05T06:27:48+00:00\"\n}"
-						}
-					]
-				},
-				{
-					"name": "List of Overlap holiday requests",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{project_url}}/managers/worker_overlap_requests?startDate={{startDate}}&endDate={{endDate}}",
-							"host": [
-								"{{project_url}}"
-							],
-							"path": [
-								"managers",
-								"worker_overlap_requests"
-							],
-							"query": [
-								{
-									"key": "startDate",
-									"value": "{{startDate}}"
-								},
-								{
-									"key": "endDate",
-									"value": "{{endDate}}"
-								}
-							]
-						}
-					},
-					"response": [
+							"key": "Content-Type",
+							"value": "application/json"
+						},
 						{
-							"name": "List of Overlap holiday requests",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{project_url}}/managers/worker_overlap_requests?startDate={{startDate}}&endDate={{endDate}}",
-									"host": [
-										"{{project_url}}"
-									],
-									"path": [
-										"managers",
-										"worker_overlap_requests"
-									],
-									"query": [
-										{
-											"key": "startDate",
-											"value": "{{startDate}}"
-										},
-										{
-											"key": "endDate",
-											"value": "{{endDate}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:32:51 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "0a5e24"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/0a5e24"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "1499"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"id\": 2,\n        \"author\": {\n            \"id\": 2,\n            \"name\": \"Sydnie Brown III\",\n            \"leaveBalance\": 7\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-22T03:55:23+00:00\",\n        \"vacationEndDate\": \"2022-10-27T14:09:15+00:00\"\n    },\n    {\n        \"id\": 3,\n        \"author\": {\n            \"id\": 1,\n            \"name\": \"Ms. Laurence Hegmann\",\n            \"leaveBalance\": -12\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-20T15:16:00+00:00\",\n        \"vacationEndDate\": \"2022-10-28T11:08:08+00:00\"\n    },\n    {\n        \"id\": 6,\n        \"author\": {\n            \"id\": 8,\n            \"name\": \"Justyn Baumbach\",\n            \"leaveBalance\": 4\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-23T09:03:53+00:00\",\n        \"vacationEndDate\": \"2022-11-07T11:55:37+00:00\"\n    },\n    {\n        \"id\": 10,\n        \"author\": {\n            \"id\": 8,\n            \"name\": \"Justyn Baumbach\",\n            \"leaveBalance\": 4\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-23T18:44:49+00:00\",\n        \"vacationEndDate\": \"2022-11-09T22:39:19+00:00\"\n    },\n    {\n        \"id\": 11,\n        \"author\": {\n            \"id\": 7,\n            \"name\": \"Dr. Adeline Gislason\",\n            \"leaveBalance\": 8\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-21T07:15:33+00:00\",\n        \"vacationEndDate\": \"2022-11-06T10:19:30+00:00\"\n    },\n    {\n        \"id\": 14,\n        \"author\": {\n            \"id\": 10,\n            \"name\": \"Madison Herman\",\n            \"leaveBalance\": 3\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-20T18:37:31+00:00\",\n        \"vacationEndDate\": \"2022-11-08T03:16:52+00:00\"\n    }\n]"
+							"key": "Date",
+							"value": "Fri, 14 Oct 2022 22:17:42 GMT"
+						},
+						{
+							"key": "X-Debug-Token",
+							"value": "9accaf"
+						},
+						{
+							"key": "X-Debug-Token-Link",
+							"value": "http://127.0.0.1:8000/_profiler/9accaf"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.24-(to be removed in future macOS)"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "473"
 						}
-					]
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"sku\": \"000007\",\n        \"name\": \"Nam aut ut.\",\n        \"category\": \"boots\",\n        \"price\": {\n            \"original\": 46791,\n            \"currency\": \"EUR\",\n            \"final\": 32753,\n            \"discount_percentage\": \"30%\"\n        }\n    },\n    {\n        \"id\": 15,\n        \"sku\": \"000003\",\n        \"name\": \"Aperiam quo recusandae.\",\n        \"category\": \"boots\",\n        \"price\": {\n            \"original\": 63079,\n            \"currency\": \"EUR\",\n            \"final\": 44155,\n            \"discount_percentage\": \"30%\"\n        }\n    },\n    {\n        \"id\": 19,\n        \"sku\": \"000007\",\n        \"name\": \"Quos vero voluptas.\",\n        \"category\": \"boots\",\n        \"price\": {\n            \"original\": 99227,\n            \"currency\": \"EUR\",\n            \"final\": 69458,\n            \"discount_percentage\": \"30%\"\n        }\n    }\n]"
 				}
 			]
 		},
 		{
-			"name": "Worker API's",
-			"item": [
-				{
-					"name": "Fetch leave balance",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{project_url}}/workers/{{id}}/remaning_leaves",
-							"host": [
-								"{{project_url}}"
-							],
-							"path": [
-								"workers",
-								"{{id}}",
-								"remaning_leaves"
-							]
-						}
-					},
-					"response": [
+			"name": "Search by category and price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/products?category=boots&price=50000",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"products"
+					],
+					"query": [
 						{
-							"name": "Fetch leave balance",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{project_url}}/workers/{{id}}/remaning_leaves",
-									"host": [
-										"{{project_url}}"
-									],
-									"path": [
-										"workers",
-										"{{id}}",
-										"remaning_leaves"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:28:13 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "7f8b8f"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/7f8b8f"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "12"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"result\": 2\n}"
+							"key": "category",
+							"value": "boots"
+						},
+						{
+							"key": "price",
+							"value": "50000"
 						}
 					]
-				},
+				}
+			},
+			"response": [
 				{
-					"name": "Check holiday request status",
-					"request": {
+					"name": "Search by category and price",
+					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{project_url}}/workers/{{id}}/holiday_requests?status={{status}}",
+							"raw": "http://127.0.0.1:8000/products?category=boots&price=50000",
+							"protocol": "http",
 							"host": [
-								"{{project_url}}"
+								"127",
+								"0",
+								"0",
+								"1"
 							],
+							"port": "8000",
 							"path": [
-								"workers",
-								"{{id}}",
-								"holiday_requests"
+								"products"
 							],
 							"query": [
 								{
-									"key": "status",
-									"value": "{{status}}"
+									"key": "category",
+									"value": "boots"
+								},
+								{
+									"key": "price",
+									"value": "50000"
 								}
 							]
 						}
 					},
-					"response": [
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
 						{
-							"name": "Check holiday request status",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{project_url}}/workers/{{id}}/holiday_requests?status={{status}}",
-									"host": [
-										"{{project_url}}"
-									],
-									"path": [
-										"workers",
-										"{{id}}",
-										"holiday_requests"
-									],
-									"query": [
-										{
-											"key": "status",
-											"value": "{{status}}"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "no-cache, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:28:34 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "0614be"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/0614be"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "505"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"id\": 1,\n        \"author\": {\n            \"id\": 1,\n            \"name\": \"Ms. Laurence Hegmann\",\n            \"leaveBalance\": 2\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-21T11:40:34+00:00\",\n        \"vacationEndDate\": \"2022-11-05T06:27:48+00:00\"\n    },\n    {\n        \"id\": 3,\n        \"author\": {\n            \"id\": 1,\n            \"name\": \"Ms. Laurence Hegmann\",\n            \"leaveBalance\": 2\n        },\n        \"status\": \"pending\",\n        \"resolvedBy\": null,\n        \"requestCreatedAt\": \"2022-10-09T01:27:16+00:00\",\n        \"vacationStartDate\": \"2022-10-20T15:16:00+00:00\",\n        \"vacationEndDate\": \"2022-10-28T11:08:08+00:00\"\n    }\n]"
-						}
-					]
-				},
-				{
-					"name": "Place a holiday request",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"author\": 2,\n  \"vacationStartDate\": \"2022-10-10 18:15:56\",\n  \"vacationEndDate\": \"2022-10-13 18:15:56\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"key": "Cache-Control",
+							"value": "no-cache, private"
 						},
-						"url": {
-							"raw": "{{project_url}}/workers/holiday_requests",
-							"host": [
-								"{{project_url}}"
-							],
-							"path": [
-								"workers",
-								"holiday_requests"
-							]
-						}
-					},
-					"response": [
 						{
-							"name": "Place a holiday request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"author\": 2,\n  \"vacationStartDate\": \"2022-10-10 18:15:56\",\n  \"vacationEndDate\": \"2022-10-13 18:15:56\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{project_url}}/workers/holiday_requests",
-									"host": [
-										"{{project_url}}"
-									],
-									"path": [
-										"workers",
-										"holiday_requests"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Cache-Control",
-									"value": "max-age=0, must-revalidate, private"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 09 Oct 2022 01:30:09 GMT"
-								},
-								{
-									"key": "Expires",
-									"value": "Sun, 09 Oct 2022 01:30:09 GMT"
-								},
-								{
-									"key": "X-Debug-Token",
-									"value": "0fb772"
-								},
-								{
-									"key": "X-Debug-Token-Link",
-									"value": "http://127.0.0.1:8000/_profiler/0fb772"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "PHP/7.3.24-(to be removed in future macOS)"
-								},
-								{
-									"key": "X-Robots-Tag",
-									"value": "noindex"
-								},
-								{
-									"key": "Content-Length",
-									"value": "53"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"result\": \"Your holiday request created with ID: 16\"\n}"
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 14 Oct 2022 22:18:39 GMT"
+						},
+						{
+							"key": "X-Debug-Token",
+							"value": "990260"
+						},
+						{
+							"key": "X-Debug-Token-Link",
+							"value": "http://127.0.0.1:8000/_profiler/990260"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.24-(to be removed in future macOS)"
+						},
+						{
+							"key": "X-Robots-Tag",
+							"value": "noindex"
+						},
+						{
+							"key": "Content-Length",
+							"value": "151"
 						}
-					]
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"sku\": \"000007\",\n        \"name\": \"Nam aut ut.\",\n        \"category\": \"boots\",\n        \"price\": {\n            \"original\": 46791,\n            \"currency\": \"EUR\",\n            \"final\": 32753,\n            \"discount_percentage\": \"30%\"\n        }\n    }\n]"
 				}
 			]
 		}
