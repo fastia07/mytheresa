@@ -28,7 +28,7 @@ You are now fully equipped to start developing! A local sqlite database is alrea
 
 ### Postman collections
 
-API endpoints of workers/manager are mentioned in the following path
+API endpoints of products is mentioned in the following path
 ``docs/postman_collection.json``
 
 ### Swagger for API Documentation
